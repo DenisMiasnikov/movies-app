@@ -1,0 +1,17 @@
+.main {
+  /* border: 1px solid black; */
+  margin: 0 auto;
+  width: 1010px;
+  min-height: 1147px;
+  background: #FFFFFF;
+}
+
+.movies-list {
+  margin: 0;
+  padding: 0;
+  width: 1010px;
+  min-height: 1147px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}

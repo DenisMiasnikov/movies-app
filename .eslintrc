@@ -1,0 +1,63 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "ignorePatterns": ["node_modules", "dist", "build"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "airbnb", 
+    "airbnb/hooks", 
+    "plugin:react/jsx-runtime", 
+    "prettier"
+  ],
+  // "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "requireConfigFile": false,
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": ["react", "jsx-a11y", "import", "react-hooks", "prettier"],
+  "rules": {
+    "camelcase": [2, {"ignoreImports": true}],
+    "react/forbid-prop-types": 0,
+    "react/require-default-props": 0,
+    "react/jsx-props-no-spreading": 0,
+    "no-unused-vars": 0,
+    "no-param-reassign": 0,
+    "no-plusplus": "off",
+    "react/state-in-constructor": 0,
+    "jsx-a11y/label-has-associated-control": 0,
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": 0,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "indent": ["error", 2],
+    "prettier/prettier": "error",
+    "linebreak-style": [0, "unix"],
+    "quotes": ["error", "single"],
+    "import/no-unresolved": [2, { "caseSensitive": false }],
+    "import/order": [
+      2,
+      {
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+        "newlines-between": "always"
+      }
+    ]
+  },
+  "settings": {
+    "version": "detect",
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"],
+        "moduleDirectory": ["node_modules", "src/"]
+      }
+    }
+  }
+}
