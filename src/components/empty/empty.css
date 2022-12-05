@@ -1,0 +1,10 @@
+.noMovie {
+  margin: 20px auto;
+  width: 260px;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 28px;
+  color: #000000;
+}

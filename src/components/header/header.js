@@ -1,11 +1,17 @@
 import React from 'react';
 
 import './header.css';
-// import SearchField from '../searchField';
-// import SearchFilter from '../searchFilter';
+import SearchInput from '../searchInput';
+import SearchFilter from '../searchFilter';
 
-function Header() {
-  return <div />;
+function Header(props) {
+  const { onQueryChange, inputValue } = props;
+  return (
+    <header className="header">
+      <SearchFilter />
+      <SearchInput onQueryChange={onQueryChange} inputValue={inputValue} />
+    </header>
+  );
 }
 
 export default Header;

@@ -1,0 +1,16 @@
+.footer {
+  display: flex;
+  justify-content: center;
+}
+
+.footer ul li:last-child {
+  display: none;
+}
+
+div.footer ul li.ant-pagination-item-active a {
+  color: white;
+}
+
+div.footer ul li.ant-pagination-item-active {
+  background-color: #1677ff;
+}

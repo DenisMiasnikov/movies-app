@@ -1,0 +1,36 @@
+.search-filter {
+  margin: 0px auto;
+  width: 146px;
+  height: 54px;
+  display: flex;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+}
+
+.search-filter label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 73px;
+  height: 54px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.search-filter label.selected {
+  color: #1890FF;;
+  border-bottom: 2px solid #1890FF;;
+}
+
+.search-filter_item {
+  flex-grow: 1;
+  align-self: center;
+}
+
+.hide {
+  margin: 0;
+  appearance: none;
+}

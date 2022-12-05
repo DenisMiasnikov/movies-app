@@ -7,8 +7,10 @@ export default class MoviesService {
     this._apiKey = '8fea04d24cb7d9ae76c4ac0dd489150e';
   }
 
-  async getMovies(input) {
-    const res = await fetch(`${this._apiBase}/search/movie?api_key=${this._apiKey}&language=en&query=${input}`);
+  async getMovies(input, page) {
+    const res = await fetch(
+      `${this._apiBase}/search/movie?api_key=${this._apiKey}&language=en&query=${input}&page=${page}`
+    );
 
     if (!res.ok) {
       throw new Error(`Could not fetch ${input} , recieved ${res.status}`);
@@ -29,7 +31,7 @@ export default class MoviesService {
 }
 
 const movie = new MoviesService();
-movie.getMovies('return').then((data) => {
+movie.getMovies('return', 3).then((data) => {
   // eslint-disable-next-line
   console.log(data);
 });

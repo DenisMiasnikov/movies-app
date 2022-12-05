@@ -85,6 +85,22 @@
   width: 239px;
 }
 
+/* .card-stars {
+  width: 105%;
+  height: 50px;
+  align-items: center;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  bottom: 0;
+  position: absolute;
+  width: 270px;
+} */
+
+div.card div.card-info ul.card-stars li {
+  margin-right: 3px;
+}
+
 .card-rank {
   position: absolute;
   display: flex;

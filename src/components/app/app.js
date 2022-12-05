@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Offline, Online } from 'react-detect-offline';
+import { debounce } from 'lodash';
 
 import MoviesService from '../../services/movies-services';
 import './app.css';
@@ -8,6 +9,7 @@ import MoviesList from '../moviesList';
 import Footer from '../footer';
 import Loading from '../loading';
 import Error from '../error';
+import Empty from '../empty';
 
 export default class App extends Component {
   moviesService = new MoviesService();
@@ -17,22 +19,62 @@ export default class App extends Component {
     loading: true,
     error: false,
     errorBody: {},
+    totalPages: 0,
+    actPage: 1,
+    query: 'return',
+    inputValue: '',
   };
 
-  constructor() {
-    super();
+  debounceTest = debounce((val) => {
+    this.setState({
+      loading: false,
+      query: val,
+      actPage: 1,
+      // inputValue: '',
+    });
+  }, 1000);
+
+  componentDidMount() {
     this.updateMovie();
-    // this.moviesService = new MoviesService();
-    // this.state = {
-    //   movieData: [],
-    // };
   }
+
+  componentDidUpdate(_prevProps, prevState) {
+    const { actPage, query } = this.state;
+    if (actPage !== prevState.actPage) {
+      this.updateMovie();
+    } else if (query !== prevState.query) {
+      this.updateMovie();
+    }
+  }
+
+  onChangePage = (page) => {
+    const newPage = page;
+    this.setState({
+      actPage: newPage,
+    });
+  };
+
+  onQueryChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    this.setState({
+      loading: true,
+      inputValue: value,
+    });
+
+    if (value !== '') {
+      this.debounceTest(value);
+    }
+  };
 
   onMoviesLoaded = (movieData) => {
     const newData = movieData.results;
+    const pages = movieData.total_pages;
     this.setState({
       movieData: newData,
       loading: false,
+      totalPages: pages,
     });
   };
 
@@ -48,26 +90,17 @@ export default class App extends Component {
   };
 
   updateMovie() {
-    this.moviesService.getMovies('return').then(this.onMoviesLoaded).catch(this.onError);
+    const { actPage, query } = this.state;
+    this.moviesService.getMovies(query, actPage).then(this.onMoviesLoaded).catch(this.onError);
   }
 
-  // updateMovie() {
-  //   this.moviesService.getMovies('return').then((movies) => {
-  //     this.setState(({ movieData }) => {
-  //       const newData = [...movieData, ...movies.results];
-
-  //       return {
-  //         movieData: newData,
-  //       };
-  //     });
-  //   });
-  // }
-
   render() {
-    const { movieData, loading, error, errorBody } = this.state;
+    const { movieData, loading, error, errorBody, totalPages, actPage, inputValue } = this.state;
     const hasData = !(loading || error);
     const spinner = loading ? <Loading /> : null;
-    const content = hasData ? <MoviesApp moviesData={movieData} /> : null;
+    const content = hasData ? (
+      <MoviesApp moviesData={movieData} pages={totalPages} actPage={actPage} onChange={this.onChangePage} />
+    ) : null;
     const errorMessage = error ? <Error data={errorBody} /> : null;
 
     return (
@@ -76,6 +109,7 @@ export default class App extends Component {
           <Error data={{ errorName: 'Offline', errorMessage: 'You are Offline, please check your connection' }} />
         </Offline>
         <Online>
+          <Header onQueryChange={this.onQueryChange} inputValue={inputValue} />
           {errorMessage}
           {spinner}
           {content}
@@ -86,12 +120,12 @@ export default class App extends Component {
 }
 
 function MoviesApp(props) {
-  const { moviesData } = props;
+  const { moviesData, pages, onChange, actPage } = props;
+  const emptyData = moviesData.length < 1 ? <Empty /> : <MoviesList data={moviesData} />;
   return (
     <>
-      <Header />
-      <MoviesList data={moviesData} />
-      <Footer />
+      {emptyData}
+      <Footer totalPages={pages} actPage={actPage} onChangePage={onChange} />
     </>
   );
 }
