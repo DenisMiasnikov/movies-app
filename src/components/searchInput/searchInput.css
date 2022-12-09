@@ -1,7 +1,6 @@
 .search-input {
-  margin: 13px auto;
+  margin: 13px;
   padding: 0px 12px;
-  width: 914px;
   height: 40px;
   background: #FFFFFF;
   border: 1px solid #D9D9D9;
@@ -14,4 +13,30 @@
   display: flex;
   align-items: center;
   color: #D9D9D9;
+}
+
+@media (min-width: 420px) {
+  .search-input {
+    margin: 13px auto;
+    min-width: 365px;
+  }
+}
+
+@media (min-width: 484px) {
+  .search-input {
+    margin: 13px auto;
+    min-width: 428px;
+  }
+}
+
+@media (min-width: 968px) {
+  .search-input {
+    min-width: 912px;
+  }
+}
+
+@media (min-width: 1936px) {
+  .search-input {
+    min-width: 1880px;
+  }
 }

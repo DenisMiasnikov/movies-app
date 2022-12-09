@@ -1,4 +1,5 @@
 .footer {
+  margin: 15px;
   display: flex;
   justify-content: center;
 }
@@ -7,7 +8,7 @@
   display: none;
 }
 
-div.footer ul li.ant-pagination-item-active a {
+div.footer ul.ant-pagination li.ant-pagination-item-active a {
   color: white;
 }
 

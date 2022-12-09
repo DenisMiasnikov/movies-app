@@ -4,9 +4,8 @@ import { Alert, Space } from 'antd';
 import './error.css';
 
 function Error(props) {
-  const onClose = (e) => {
-    // eslint-disable-next-line no-console
-    console.log(e, 'I was closed.');
+  const refreshPage = () => {
+    window.location.reload();
   };
 
   const { data } = props;
@@ -15,7 +14,10 @@ function Error(props) {
   return (
     <div className="error">
       <Space direction="vertical" style={{ width: '100%' }}>
-        <Alert message={errorName} description={errorMessage} type={errorName} closable onClose={onClose} />
+        <Alert message={`Ooops, ${errorName}`} description={errorMessage} type={errorName} />
+        <button type="button" className="btn-error" onClick={refreshPage}>
+          Please, try again
+        </button>
       </Space>
     </div>
   );
